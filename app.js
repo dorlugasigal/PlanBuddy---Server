@@ -12,6 +12,6 @@ app.get("/",()=>{res.send("up")})
 
 app.use('/api', api);
 
-app.listen(3000, ()=>{
+app.listen(process.env.PORT || 3000, ()=>{
   console.log("connected")
 })
