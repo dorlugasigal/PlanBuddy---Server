@@ -8,7 +8,7 @@ var api = require("./api")
 
 var app = express();
 
-
+app.get("/",()=>{res.send("up")})
 
 app.use('/api', api);
 
