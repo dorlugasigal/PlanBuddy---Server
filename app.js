@@ -4,14 +4,15 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var api = require("./api")
+var bodyParser = require("body-parser");
 
 
 var app = express();
-
-app.get("/",()=>{res.send("up")})
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended:true}));
 
 app.use('/api', api);
 
-app.listen(process.env.PORT || 3000, ()=>{
+app.listen(80, ()=>{
   console.log("connected")
 })

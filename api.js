@@ -15,42 +15,60 @@ router.post("/deleteTask", deleteTask)
 
 module.exports = router
 
-function addUser(req, res, next) {
+async function addUser(req, res, next) {
     var reqBody = req["body"]
-    db.addUser(reqBody["name"], reqBody["phone"], reqBody["email"], reqBody["password"])
+    let action = await db.addUser(reqBody["name"], reqBody["phone"], reqBody["email"], reqBody["password"])
+    res.send(action)
 }
 
-function addChild(req, res, next) {
+async function addChild(req, res, next) {
     var reqBody = req["body"]
-    db.addChild(reqBody["parentPhone"], reqBody["name"], reqBody["phone"])
+    let action = await db.addChild(reqBody["parentPhone"], reqBody["name"], reqBody["phone"])
+    res.send(action)
+
 }
 
 function addTask(req, res, next) {
     var reqBody = req["body"]
-    db.addTask(reqBody["phone"], reqBody["name"], reqBody["image"], reqBody["time"], reqBody["list"], reqBody["note"])
+    console.log(reqBody)
+    console.log(reqBody)
+    db.addTask(reqBody["phone"], reqBody["name"], reqBody["image"], reqBody["startTime"], reqBody["endTime"], reqBody["list"], reqBody["note"])
+        .then(data => {
+            res.send(data)
+        })
 }
 
-function addNote(req, res, next) {
+async function addNote(req, res, next) {
     var reqBody = req["body"]
-    db.addNote(reqBody["phone"], reqBody["taskId"], reqBody["note"])
+    let action = await db.addNote(reqBody["phone"], reqBody["taskId"], reqBody["note"])
+    res.send(action)
+
 }
 
-function addActionList(req, res, next) {
+async function addActionList(req, res, next) {
     var reqBody = req["body"]
-    db.addActionList(reqBody["phone"], reqBody["taskId"], reqBody["list"])
+    let action = await db.addActionList(reqBody["phone"], reqBody["taskId"], reqBody["list"])
+    res.send(action)
+
 }
 
-function updateTaskStatus(req, res, next) {
+async function updateTaskStatus(req, res, next) {
     var reqBody = req["body"]
-    db.updateTaskStatus(reqBody["phone"], reqBody["taskId"])
+    let action = await db.updateTaskStatus(reqBody["phone"], reqBody["taskId"])
+    res.send(action)
+
 }
 
-function deleteChild(req, res, next) {
+async function deleteChild(req, res, next) {
     var reqBody = req["body"]
-    db.deleteChild(reqBody["phone"])
+    let action = await db.deleteChild(reqBody["phone"])
+    res.send(action)
+
 }
 
-function deleteTask(req, res, next) {
+async function deleteTask(req, res, next) {
     var reqBody = req["body"]
-    db.deleteChild(reqBody["phone"], reqBody["taskId"])
+    let action = await db.deleteChild(reqBody["phone"], reqBody["taskId"])
+    res.send(action)
+
 }
